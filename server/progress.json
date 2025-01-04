@@ -2,5 +2,9 @@
   "100": {
     "name": "h1",
     "old": 10
+  },
+  "player123": {
+    "password": "$2b$10$nD3sL7eI9rD9HllYuErR6eqo71gNvLfhJQlxnw34gNNzRd5iMNavW",
+    "lastUpdated": 1736016234212
   }
 }
