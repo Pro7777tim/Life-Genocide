@@ -1,0 +1,37 @@
+{
+    "frames": {
+        "win1": {
+            "frame": { "x": 1, "y": 1, "w": 200, "h": 200 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 200, "h": 200 },
+            "sourceSize": { "w": 200, "h": 200 },
+            "pivot": { "x": 0.5, "y": 0.5 }
+        },
+        "win2": {
+            "frame": { "x": 200, "y": 1, "w": 300, "h": 200 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 300, "h": 200 },
+            "sourceSize": { "w": 300, "h": 200 },
+            "pivot": { "x": 0.5, "y": 0.5 }
+        },
+        "win3": {
+            "frame": { "x": 520, "y": 1, "w": 100, "h": 200 },
+            "rotated": false,
+            "trimmed": false,
+            "spriteSourceSize": { "x": 0, "y": 0, "w": 100, "h": 200 },
+            "sourceSize": { "w": 100, "h": 200 },
+            "pivot": { "x": 0.5, "y": 0.5 }
+        }
+    },
+    "meta": {
+        "app": "no",
+        "version": "1.0",
+        "image": "win.png",
+        "format": "RGBA8888",
+        "size": { "w": 600, "h": 200 },
+        "scale": "1",
+        "smartupdate": "$TexturePacker:SmartUpdate:f2781d89823d5a67fc31381af364b421:da82646b19b2f0c08684086824b1e581:71625947cf221c10549b852c13ffedc7$"
+    }
+}
