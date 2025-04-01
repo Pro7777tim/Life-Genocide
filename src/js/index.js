@@ -70,9 +70,6 @@ let menuOpen = false;
 let shopDom;
 let shopDomEl;
 let shopOpen = false;
-let rocketDom;
-let rocketDomEl;
-let rocketOpen = false;
 let nuclDom;
 let nuclDomEl;
 let nuclOpen = false;
@@ -289,7 +286,7 @@ const gameSC = {
         //camera
         this.cameras.main.setBounds(0, 0, 4000, 4000);
         this.cameras.main.setZoom(2);
-        this.cameras.main.setSize(1280, 720);
+        this.cameras.main.setSize(1920, 1080);
         //create background and tools
         this.scene.stop("died");
         this.scene.stop("win");
@@ -957,6 +954,7 @@ const interfaceSC = {
         this.load.image("launchWavesImg", "src/img/launchWaves.png");
         this.load.image("moneyImg", "src/img/money.png");
         this.load.image("skullImg", "src/img/skull.png");
+        this.load.image("rustFrame", "src/img/rust_frame.png");
         this.load.script(
             "webfont",
             "https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"
@@ -965,9 +963,9 @@ const interfaceSC = {
     updateBar: function (bar, now, max, y, color, x) {
         bar.clear();
         bar.fillStyle(color, 1);
-        bar.fillRect(x, y, (now / max) * 300, 20);
-        bar.lineStyle(1, 0x000000, 1);
-        bar.strokeRect(x, y, 300, 20);
+        bar.fillRect(x, y, (now / max) * 350, 25);
+        bar.lineStyle(2, 0x000000, 2);
+        bar.strokeRect(x, y, 350, 25);
     },
     centerObjectsX: function (scene, objects, centerX, spacingX = 50) {
         const totalWidth = (objects.length - 1) * spacingX;
@@ -977,6 +975,121 @@ const interfaceSC = {
         });
     },
     create: function () {
+        //fonts
+        WebFont.load({
+            google: {
+                families: ["Pixelify Sans"],
+            },
+            active: () => {
+                //bar
+                hpBar = interfaceSCn.add.graphics();
+                textHp = interfaceSCn.add
+                    .text(10, 5, "Health", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        color: "#ffffff",
+                    })
+                    .setShadow(2, 2, "#8B0000", 10);
+                hpBar.setDepth(3);
+                textHp.setDepth(4);
+                stBar = interfaceSCn.add.graphics();
+                textSt = interfaceSCn.add
+                    .text(10, 45, "Stamina", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        color: "#ffffff",
+                    })
+                    .setShadow(2, 2, "#00008B", 10);
+                stBar.setDepth(3);
+                textSt.setDepth(4);
+                hgBar = interfaceSCn.add.graphics();
+                textHg = interfaceSCn.add
+                    .text(400, 5, "Hunger", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        color: "#ffffff",
+                    })
+                    .setShadow(2, 2, "#8B4513", 10);
+                hgBar.setDepth(3);
+                textHg.setDepth(4);
+                armBar = interfaceSCn.add.graphics();
+                textArm = interfaceSCn.add
+                    .text(400, 45, "Armor", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        color: "#ffffff",
+                    })
+                    .setShadow(2, 2, "#808080", 10);
+                armBar.setDepth(3);
+                textArm.setDepth(4);
+
+                //money
+                moneyImg = interfaceSCn.add
+                    .image(35, 150, "moneyImg")
+                    .setDepth(3)
+                    .setDisplaySize(80, 80);
+                for (let i = 1; i < 5; i++) {
+                    interfaceSCn.add
+                        .graphics()
+                        .fillStyle(0x32cd32, 0.5)
+                        .fillCircle(35, 150, 34 + i)
+                        .setDepth(2);
+                }
+                moneyTxt = interfaceSCn.add
+                    .text(80, 135, "0", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "36px",
+                        fontStyle: "bold",
+                        fill: "#FFF",
+                        stroke: "#008000",
+                        strokeThickness: 3,
+                    })
+                    .setShadow(2, 2, "#32CD32", 10);
+                nextMoneyTxt = interfaceSCn.add
+                    .text(80, 110, "+0", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        fill: "#FFF",
+                        stroke: "#0000FF",
+                        strokeThickness: 3,
+                    })
+                    .setShadow(2, 2, "#32CD32", 10);
+                skullImg = interfaceSCn.add
+                    .image(35, 230, "skullImg")
+                    .setDepth(3)
+                    .setDisplaySize(70, 70);
+                interfaceSCn.add
+                    .graphics()
+                    .fillStyle(0x32cd32, 0.5)
+                    .fillCircle(35, 230, 38)
+                    .setDepth(2);
+                skullTxt = interfaceSCn.add
+                    .text(80, 215, "0", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "36px",
+                        fontStyle: "bold",
+                        fill: "#FFF",
+                        stroke: "#008000",
+                        strokeThickness: 3,
+                    })
+                    .setShadow(2, 2, "#32CD32", 10);
+                nextSkullTxt = interfaceSCn.add
+                    .text(80, 190, "+0", {
+                        fontFamily: "Pixelify Sans",
+                        fontSize: "28px",
+                        fontStyle: "bold",
+                        fill: "#FFF",
+                        stroke: "#0000FF",
+                        strokeThickness: 3,
+                    })
+                    .setShadow(2, 2, "#32CD32", 10);
+            },
+        });
         //overlay
         hpOverlay = this.add.graphics();
         hpOverlay.setScrollFactor(0);
@@ -1008,35 +1121,6 @@ const interfaceSC = {
             this.cameras.main.width,
             this.cameras.main.height
         );
-        //bar
-        hpBar = this.add.graphics();
-        textHp = this.add.text(10, 10, "Health", {
-            font: "bold 18px Arial",
-            fill: "#ffffff",
-        });
-        hpBar.setDepth(3);
-        textHp.setDepth(4);
-        stBar = this.add.graphics();
-        textSt = this.add.text(10, 50, "Stamina", {
-            font: "bold 18px Arial",
-            fill: "#ffffff",
-        });
-        stBar.setDepth(3);
-        textSt.setDepth(4);
-        hgBar = this.add.graphics();
-        textHg = this.add.text(350, 10, "Hunger", {
-            font: "bold 18px Arial",
-            fill: "#ffffff",
-        });
-        hgBar.setDepth(3);
-        textHg.setDepth(4);
-        armBar = this.add.graphics();
-        textArm = this.add.text(350, 50, "Armor", {
-            font: "bold 18px Arial",
-            fill: "#ffffff",
-        });
-        armBar.setDepth(3);
-        textArm.setDepth(4);
         //menu
         WebFont.load({
             google: {
@@ -1096,7 +1180,11 @@ const interfaceSC = {
         border-radius: 20px;
         cursor: url('src/img/cursor.png'), auto;
         `;
-        menuDomEl = interfaceSCn.add.dom(640, 360, menuDom);
+        menuDomEl = interfaceSCn.add.dom(
+            interfaceSCn.cameras.main.width / 2,
+            360,
+            menuDom
+        );
         txtMenuSty = document.getElementById("menu").style;
         img1MenuSty = document.getElementsByClassName("img")[0].style;
         img2MenuSty = document.getElementsByClassName("img")[1].style;
@@ -1115,26 +1203,31 @@ const interfaceSC = {
         menuDomEl.setVisible(false);
         menuDomEl.disableInteractive();
         menu = this.add
-            .image(1230, 120, "menuImg")
+            .image(1850, 160, "menuImg")
             .setDepth(3)
-            .setDisplaySize(60, 60);
-        menu.setInteractive().on("pointerdown", () => {
-            if (menuOpen) {
-                menuDomEl.setVisible(false);
-                menuDomEl.disableInteractive();
-                menuOpen = false;
-                game.scene.resume("sprite");
-            } else {
-                menuDomEl.setVisible(true);
-                menuDomEl.setInteractive();
-                menuOpen = true;
-                game.scene.pause("sprite");
-            }
-        });
+            .setDisplaySize(80, 80);
+        menu.setInteractive()
+            .on("pointerdown", () => {
+                menu.setTint(0x808080);
+                if (menuOpen) {
+                    menuDomEl.setVisible(false);
+                    menuDomEl.disableInteractive();
+                    menuOpen = false;
+                    game.scene.resume("sprite");
+                } else {
+                    menuDomEl.setVisible(true);
+                    menuDomEl.setInteractive();
+                    menuOpen = true;
+                    game.scene.pause("sprite");
+                }
+            })
+            .on("pointerup", () => {
+                menu.clearTint();
+            });
 
         //rocket
-        rocketDom = document.createElement("div");
-        rocketDom.innerHTML = `
+        nuclDom = document.createElement("div");
+        nuclDom.innerHTML = `
 <h1 id="menu">Menu</h1>
 <img class="img" src="src/img/exit.png" alt="exit" />
 <img class="img" src="src/img/save.png" alt="save" />
@@ -1164,7 +1257,7 @@ const interfaceSC = {
     alt="fullscreen"
 />
         `;
-        rocketDom.style = `
+        nuclDom.style = `
         background-color: #AFEEEE; 
         border: 5px solid #0000FF;
         width: 800px;
@@ -1179,70 +1272,35 @@ const interfaceSC = {
         border-radius: 20px;
         cursor: url('src/img/cursor.png'), auto;
         `;
-        rocketDomEl = interfaceSCn.add.dom(640, 360, rocketDom);
-        rocketDomEl.setVisible(false);
-        rocketDomEl.disableInteractive();
+        nuclDomEl = interfaceSCn.add.dom(
+            interfaceSCn.cameras.main.width / 2,
+            360,
+            nuclDom
+        );
+        nuclDomEl.setVisible(false);
+        nuclDomEl.disableInteractive();
 
-        rocket = this.add
-            .image(1230, 200, "launchWavesImg")
+        nucl = this.add
+            .image(1850, 250, "nuclImg")
             .setDepth(3)
-            .setDisplaySize(60, 60);
-        rocket.setInteractive().on("pointerdown", () => {
-            if (rocketOpen) {
-                rocketDomEl.setVisible(false);
-                rocketDomEl.disableInteractive();
-                rocketOpen = false;
+            .setDisplaySize(80, 80);
+        nucl.setInteractive().on("pointerdown", () => {
+            if (nuclOpen) {
+                nuclDomEl.setVisible(false);
+                nuclDomEl.disableInteractive();
+                nuclOpen = false;
             } else {
-                rocketDomEl.setVisible(true);
-                rocketDomEl.setInteractive();
-                rocketOpen = true;
+                nuclDomEl.setVisible(true);
+                nuclDomEl.setInteractive();
+                nuclOpen = true;
             }
         });
-        nucl = this.add
-            .image(1230, 280, "nuclImg")
-            .setDepth(3)
-            .setDisplaySize(60, 60);
-        nucl.setInteractive().on("pointerdown", () => {
-            console.log("hi");
-        });
         shop = this.add
-            .image(1230, 360, "shopImg")
+            .image(1850, 340, "shopImg")
             .setDepth(3)
-            .setDisplaySize(60, 60);
+            .setDisplaySize(80, 80);
         shop.setInteractive().on("pointerdown", () => {
             console.log("hi");
-        });
-        moneyImg = this.add
-            .image(23, 120, "moneyImg")
-            .setDepth(3)
-            .setDisplaySize(50, 50);
-        moneyTxt = this.add.text(50, 105, "0", {
-            font: "bold 28px Arial",
-            fill: "#FFF",
-            stroke: "#008000",
-            strokeThickness: 2,
-        });
-        nextMoneyTxt = this.add.text(50, 85, "+0", {
-            font: "bold 24px Arial",
-            fill: "#FFF",
-            stroke: "#0000FF",
-            strokeThickness: 2,
-        });
-        skullImg = this.add
-            .image(23, 200, "skullImg")
-            .setDepth(3)
-            .setDisplaySize(45, 45);
-        skullTxt = this.add.text(50, 185, "0", {
-            font: "bold 28px Arial",
-            fill: "#FFF",
-            stroke: "#008000",
-            strokeThickness: 2,
-        });
-        nextSkullTxt = this.add.text(50, 165, "+0", {
-            font: "bold 24px Arial",
-            fill: "#FFF",
-            stroke: "#0000FF",
-            strokeThickness: 2,
         });
 
         //mobile management
@@ -1440,8 +1498,8 @@ const interfaceSC = {
         //update bar
         interfaceSC.updateBar(hpBar, playerOj.health, 100, 10, 0xff0000, 10);
         interfaceSC.updateBar(stBar, playerOj.stamina, 100, 50, 0x0077be, 10);
-        interfaceSC.updateBar(hgBar, playerOj.hunger, 100, 10, 0xff8c00, 350);
-        interfaceSC.updateBar(armBar, playerOj.armor, 100, 50, 0x808080, 350);
+        interfaceSC.updateBar(hgBar, playerOj.hunger, 100, 10, 0xff8c00, 400);
+        interfaceSC.updateBar(armBar, playerOj.armor, 100, 50, 0x808080, 400);
         //mobile management
         if (isMobile) {
             if (isDownBt) {
@@ -1981,8 +2039,8 @@ const sceneAR = [gameSC, interfaceSC, diedSC, winCS];
 const config = {
     type: Phaser.AUTO,
     parent: "game_div",
-    width: 1280,
-    height: 720,
+    width: 1920,
+    height: 1080,
     render: {
         pixelArt: true,
         antialias: true,
